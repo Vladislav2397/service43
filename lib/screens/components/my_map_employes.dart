@@ -1,26 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong/latlong.dart';
-import '../model/master.dart';
+import '../model/employee.dart';
 
 
-// ignore: must_be_immutable
-class MyMapMasters extends StatelessWidget {
-	List<Master> masters;
-	MyMapMasters({this.masters});
+class MyMapEmployes extends StatefulWidget {
+	final List<Employee> employes;
+	MyMapEmployes(this.employes);
 
+  @override
+  _MyMapEmployesState createState() => _MyMapEmployesState();
+}
+
+class _MyMapEmployesState extends State<MyMapEmployes> {
 	String url = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
 
 	List<Marker> _getMarkers() {
 		List<Marker> markers = [];
-		for (Master master in this.masters) {
+		for (Employee employee in this.widget.employes) {
 			markers.add(Marker(
-				point: master.pos,
+				point: employee.pos,
 				builder: (ctx) {
 					return Container(
 						child: Icon(
 							Icons.location_on,
-							color: master.isFree ? Colors.green[800] : Colors.red[800],
+							color: employee.isFree ? Colors.green[800] : Colors.red[800],
 							size: 50,
 						),
 					);

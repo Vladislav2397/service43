@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import '../model/master.dart';
+import '../model/employee.dart';
 
 
-// ignore: must_be_immutable
-class MyListMasters extends StatelessWidget {
-	List<Master> masters;
-	MyListMasters({this.masters});
+class MyListEmployes extends StatelessWidget {
+	final List<Employee> employes;
+
+	MyListEmployes(this.employes);
 
 	@override
 	Widget build(BuildContext context) {
 		return ListView.builder(
-			itemCount: this.masters.length,
+			itemCount: this.employes.length,
 			itemBuilder: (ctx, index) {
 				return Row(
 					children: <Widget>[
@@ -29,14 +29,14 @@ class MyListMasters extends StatelessWidget {
 							child: Column(
 								children: <Widget>[
 									Text(
-										this.masters[index].fullName,
+										this.employes[index].name,
 										style: TextStyle(
 											fontWeight: FontWeight.bold,
 											fontSize: 20,
 										),
 									),
 									Text(
-										this.masters[index].info,
+										this.employes[index].work,
 										style: TextStyle(
 											fontSize: 16,
 										),

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:service43/screens/components/my_dropdown_button.dart';
+import 'package:service43/screens/components/my_form_field.dart';
 import 'components/my_button.dart';
 
 
@@ -14,13 +16,14 @@ class OrderScreen extends StatelessWidget {
 						children: <Widget>[
 							Expanded(
 								child: Center(
-									child: TextFormField(
-										key: Key("service"),
-										decoration: InputDecoration(
-											hintText: "Услуга",
-										),
-										style: TextStyle(fontSize: 20),
-									)
+									child: MyDropdownButton(
+										items: [
+											'Сантехнические работы',
+											'Электротехнические работы',
+											'Монтажные работы'
+										],
+										hintText: 'Выберите услугу',
+									),
 								),
 							),
 							Expanded(
@@ -29,23 +32,13 @@ class OrderScreen extends StatelessWidget {
 									child: Column(
 										mainAxisAlignment: MainAxisAlignment.center,
 										children: <Widget>[
-											TextFormField(
-												key: Key("street_num"),
-												decoration: InputDecoration(
-													hintText: "Улица",
-												),
-											),
-											TextFormField(
-												key: Key("home_num"),
-												decoration: InputDecoration(
-													hintText: "Дом",
-												),
-											),
-											TextFormField(
-												key: Key("flat_num"),
-												decoration: InputDecoration(
-													hintText: "Квартира",
-												),
+											MyFormField('Улица'),
+											Row(
+												children: <Widget>[
+													Expanded(child: MyFormField('Дом')),
+													SizedBox(width: 30),
+													Expanded(child: MyFormField('Квартира')),
+												],
 											),
 										],
 									),

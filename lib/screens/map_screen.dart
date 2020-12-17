@@ -1,64 +1,51 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:latlong/latlong.dart';
+import 'package:http/http.dart' as http;
+import 'package:service43/screens/components/my_map_employes.dart';
+import 'package:service43/screens/model/employee.dart';
 
-import 'components/my_list_masters.dart';
-import 'components/my_map_masters.dart';
-import 'model/master.dart';
+import 'components/my_list_employes.dart';
 
+class MapScreen extends StatefulWidget {
+	@override
+	_MapScreenState createState() => _MapScreenState();
+}
 
-// ignore: must_be_immutable
-class MapScreen extends StatelessWidget {
+class _MapScreenState extends State<MapScreen> {
+	Future<List<Employee>> futureEmployes;
+	@override
+	void initState() {
+		super.initState();
+		futureEmployes = fetchEmployee();
+	}
 
-	List<Master> _masters = [
-		Master(
-			fullName: "Alex",
-			info: "The cleaner",
-			isFree: true,
-			pos: LatLng(58.59670, 49.66010)
-		),
-		Master(
-			fullName: "Oleg",
-			info: "The proger",
-			isFree: true,
-			pos: LatLng(58.59665, 49.65500)
-		),
-		Master(
-			fullName: "Pavel",
-			info: "The abs",
-			isFree: true,
-			pos: LatLng(58.59665, 49.65000)
-		),
-		Master(
-			fullName: "Igor",
-			info: "The observer",
-			isFree: true,
-			pos: LatLng(58.59205, 49.65680)
-		),
-		Master(
-			fullName: "Alex",
-			info: "The cleaner",
-			isFree: true,
-			pos: LatLng(58.60670, 49.64010)
-		),
-		Master(
-			fullName: "Oleg",
-			info: "The proger",
-			isFree: true,
-			pos: LatLng(58.60665, 49.68500)
-		),
-		Master(
-			fullName: "Pavel",
-			info: "The abs",
-			isFree: true,
-			pos: LatLng(58.60665, 49.66000)
-		),
-		Master(
-			fullName: "Igor",
-			info: "The observer",
-			isFree: true,
-			pos: LatLng(58.60205, 49.67680)
-		),
-	];
+	Future<List<Employee>> fetchEmployee() async {
+		String url = 'https://nameless-cliffs-62309.herokuapp.com/service43';
+		final response = await http.get(url);
+
+		var jsonEmployes = response.body;
+		List<Employee> employes = [];
+
+		if (response.statusCode == 200) {
+			for (var employee in jsonDecode(jsonEmployes)) {
+				employes.add(
+					Employee(
+						name: employee['fullName'],
+						work: employee['info'],
+						isFree: employee['isFree'],
+						rating: employee['rating'],
+						pos: LatLng(
+							employee['pos'][0],
+							employee['pos'][1],
+						)
+					)
+				);
+			}
+			return employes;
+		} else { throw Exception('Failed to load employes'); }
+	}
 
 	@override
 	Widget build(BuildContext context) {
@@ -67,13 +54,26 @@ class MapScreen extends StatelessWidget {
 			body: Column(
 				children: <Widget>[
 					Expanded(
-						child: MyMapMasters(
-							masters: this._masters
-						),
-					),
+						child: FutureBuilder<List<Employee>>(
+						future: futureEmployes,
+						builder: (context, snapshot) {
+							if (snapshot.hasData) {
+								return MyMapEmployes(snapshot.data);
+							} else {
+								return Center(child: CircularProgressIndicator());
+							}
+						},
+					)),
 					Expanded(
-						child: MyListMasters(
-							masters: this._masters
+						child: FutureBuilder<List<Employee>>(
+							future: futureEmployes,
+							builder: (context, snapshot) {
+								if (snapshot.hasData) {
+									return MyListEmployes(snapshot.data);
+								} else {
+									return Center(child: CircularProgressIndicator());
+								}
+							},
 						),
 					),
 				],

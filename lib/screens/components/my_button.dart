@@ -21,7 +21,7 @@ class MyButton extends StatelessWidget {
 			color: this._getButtonTheme(this.btnTheme),
 			textColor: Colors.white,
 			shape: RoundedRectangleBorder(
-				borderRadius: BorderRadius.circular(6)
+				borderRadius: BorderRadius.circular(9)
 			),
 			child: Container(
 				child: Text(
