@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:service43/screens/components/my_phone_form_field.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'components/my_button.dart';
 
-
 class SOSScreen extends StatelessWidget {
+	final String myPhone = "+7(900)999-99-99";
+
 	@override
 	Widget build(BuildContext context) {
 		return Scaffold(
@@ -18,11 +20,10 @@ class SOSScreen extends StatelessWidget {
 								crossAxisAlignment: CrossAxisAlignment.center,
 								children: <Widget>[
 									Padding(
-										padding: const EdgeInsets.symmetric(horizontal: 30),
-										child: TextFormField(
-											style: TextStyle(fontSize: 20),
-										),
-									),
+											padding: const EdgeInsets.symmetric(
+												horizontal: 30
+											),
+											child: MyPhoneFormField('+7 123 456 78 89')),
 									Text("Оставьте свой номер для"),
 									Text("обратного вызова"),
 									SizedBox(height: 30),
@@ -36,16 +37,20 @@ class SOSScreen extends StatelessWidget {
 						),
 						Row(mainAxisAlignment: MainAxisAlignment.center, children: [
 							Expanded(child: Divider(color: Colors.black)),
-							Text("или", style: TextStyle(fontSize: 18),),
+							Text(
+								"или",
+								style: TextStyle(fontSize: 18),
+							),
 							Expanded(child: Divider(color: Colors.black)),
 						]),
 						Expanded(
 							child: Column(
 								mainAxisAlignment: MainAxisAlignment.center,
 								children: <Widget>[
-									Text('Позвоните нам', style: TextStyle(fontSize: 18)),
-									Text(
-										'+7(900)-999-99-99',
+									Text('Позвоните нам',
+										style: TextStyle(fontSize: 18)
+									),
+									Text(myPhone,
 										style: TextStyle(
 											fontSize: 18,
 											fontWeight: FontWeight.bold

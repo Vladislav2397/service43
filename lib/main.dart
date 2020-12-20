@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:service43/screens/login_screen.dart';
 import 'screens/sos_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/order_screen.dart';
@@ -17,8 +18,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      initialRoute: '/',
+      initialRoute: '/login',
       routes: {
+				'/login': (_) => LoginScreen(),
         '/': (_) => HomeScreen(),
         '/order': (_) => OrderScreen(),
         '/map': (_) => MapScreen(),
