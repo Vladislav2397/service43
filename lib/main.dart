@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 
 import 'config.dart';
 
+// import 'screens/log_in_screen.dart';
 import 'screens/sign_up_screen.dart';
 import 'screens/sos_screen.dart';
 import 'screens/home_screen.dart';
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: appName,
-      initialRoute: '/signup',
+      initialRoute: isSignUp ? '/' : '/signup',
       routes: {
         '/': (_) => HomeScreen(),
         '/signup': (_) => SignUpScreen(),
