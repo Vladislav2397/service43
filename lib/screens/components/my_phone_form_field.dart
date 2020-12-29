@@ -9,7 +9,7 @@ class MyPhoneFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       decoration: InputDecoration(hintText: this.hintText),
-			textAlign: TextAlign.center,
+      textAlign: TextAlign.center,
     );
   }
 }

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:service43/config.dart';
+
 import 'package:service43/screens/components/my_dropdown_button.dart';
 import 'package:service43/screens/components/my_form_field.dart';
-import 'components/my_button.dart';
+import 'package:service43/screens/components/my_button.dart';
 
 class OrderScreen extends StatelessWidget {
   @override
@@ -66,7 +67,9 @@ class OrderScreen extends StatelessWidget {
                           btnText: "Выйти",
                           btnPressFunc: () {
                             auth.signOut();
-                            Navigator.pushNamed(context, '/signup');
+                            Navigator.
+                              of(context).
+                              popUntil(ModalRoute.withName('/signup'));
                           },
                           btnTheme: MyButtonTheme.secondary,
                         ),
