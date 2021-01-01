@@ -19,7 +19,7 @@ class MyListEmployes extends StatelessWidget {
               height: 75,
               child: Center(
                 child: Image(
-                  image: AssetImage("assets/images/user.jpg"),
+                  image: AssetImage('assets/images/user.jpg'),
                   width: 75,
                   height: 75,
                 ),
@@ -36,7 +36,7 @@ class MyListEmployes extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    this.employes[index].work,
+                    this.employes[index].job,
                     style: TextStyle(
                       fontSize: 16,
                     ),

@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'package:service43/config.dart';
 import 'package:service43/screens/components/my_button.dart';
+import 'package:service43/screens/home_screen.dart';
 
 class SignUpScreen extends StatelessWidget {
+	static final route = '/sign-up';
   final _emailCtrl = TextEditingController();
   final _passwordCtrl = TextEditingController();
 
@@ -26,25 +28,31 @@ class SignUpScreen extends StatelessWidget {
             SizedBox(height: 30),
             TextFormField(
               controller: _emailCtrl,
-              decoration: InputDecoration(hintText: "Email"),
+              decoration: InputDecoration(hintText: 'Email'),
+              validator: (String value) {
+                return value.isEmpty ? 'Please enter some text' : null;
+              },
             ),
             SizedBox(height: 10),
             TextFormField(
               controller: _passwordCtrl,
-              decoration: InputDecoration(hintText: "Password"),
+              decoration: InputDecoration(hintText: 'Password'),
+              validator: (String value) {
+                return value.isEmpty ? 'Please enter some text' : null;
+              },
             ),
             SizedBox(height: 30),
             MyButton(
-              btnText: "Войти",
+              btnText: 'Войти',
               btnPressFunc: () => signUp(
                   _emailCtrl.text.trim(), _passwordCtrl.text.trim(), context),
               btnTheme: MyButtonTheme.primary,
             ),
             SizedBox(height: 15),
             MyButton(
-              btnText: "Зарегестрироваться",
+              btnText: 'Зарегестрироваться',
               btnPressFunc: () {
-                Navigator.of(context).pushReplacementNamed('/register');
+                Navigator.of(context).pushNamed('/register');
               },
               btnTheme: MyButtonTheme.secondary,
             )
@@ -58,10 +66,10 @@ class SignUpScreen extends StatelessWidget {
     try {
       await auth.signInWithEmailAndPassword(email: email, password: password);
       if (auth.currentUser != null) {
-        Navigator.of(context).popAndPushNamed('/index');
+        Navigator.of(context).popAndPushNamed(HomeScreen.route);
       }
     } catch (e) {
-      print("Error");
+      print('Error');
     }
   }
 }

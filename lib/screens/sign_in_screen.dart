@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:latlong/latlong.dart';
+
 
 Future<List<Master>> fetchMaster() async {
 	final response =
@@ -91,7 +91,7 @@ class _MyAppState extends State<MyApp> {
 													height: 75,
 													child: Center(
 														child: Image(
-															image: AssetImage("assets/images/user.jpg"),
+															image: AssetImage('assets/images/user.jpg'),
 															width: 75,
 															height: 75,
 														),
@@ -121,7 +121,7 @@ class _MyAppState extends State<MyApp> {
 									},
 								);
 							} else {
-								return Text("${snapshot.error}");
+								return Text('${snapshot.error}');
 							}
 						},
 					),

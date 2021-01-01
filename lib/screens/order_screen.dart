@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:service43/config.dart';
 
+import 'package:service43/config.dart';
 import 'package:service43/screens/components/my_dropdown_button.dart';
 import 'package:service43/screens/components/my_form_field.dart';
 import 'package:service43/screens/components/my_button.dart';
 
 class OrderScreen extends StatelessWidget {
+	static final route = '/order';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,24 +54,22 @@ class OrderScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
                         MyButton(
-                          btnText: "Заказать услугу",
+                          btnText: 'Заказать услугу',
                           btnPressFunc: this.btnPress,
                           btnTheme: MyButtonTheme.primary,
                         ),
                         MyButton(
-                          btnText: "Заказать звонок",
+                          btnText: 'Заказать звонок',
                           btnPressFunc: () {
                             Navigator.pushNamed(context, '/sos');
                           },
                           btnTheme: MyButtonTheme.secondary,
                         ),
                         MyButton(
-                          btnText: "Выйти",
+                          btnText: 'Выйти',
                           btnPressFunc: () {
                             auth.signOut();
-                            Navigator.
-                              of(context).
-                              popUntil(ModalRoute.withName('/signup'));
+                            Navigator.of(context).pop();
                           },
                           btnTheme: MyButtonTheme.secondary,
                         ),
@@ -84,6 +84,6 @@ class OrderScreen extends StatelessWidget {
   }
 
   btnPress() {
-    print("ButtonPress");
+    print('ButtonPress');
   }
 }

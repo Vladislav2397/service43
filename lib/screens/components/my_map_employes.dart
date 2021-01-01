@@ -13,7 +13,7 @@ class MyMapEmployes extends StatefulWidget {
 }
 
 class _MyMapEmployesState extends State<MyMapEmployes> {
-  String url = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
+  String url = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 
   List<Marker> _getMarkers() {
     List<Marker> markers = [];
@@ -37,7 +37,7 @@ class _MyMapEmployesState extends State<MyMapEmployes> {
   @override
   Widget build(BuildContext context) {
     return FlutterMap(
-      key: Key("flutter_map"),
+      key: Key('flutter_map'),
       options: MapOptions(
         center: LatLng(58.59665, 49.66007),
         zoom: 13,
@@ -46,7 +46,7 @@ class _MyMapEmployesState extends State<MyMapEmployes> {
         new TileLayerOptions(
           urlTemplate: this.url, subdomains: ['a', 'b', 'c']),
         new MarkerLayerOptions(
-          key: Key("flutter_map_layer"),
+          key: Key('flutter_map_layer'),
           markers: this._getMarkers(),
         )
       ],

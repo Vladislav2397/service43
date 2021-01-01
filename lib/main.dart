@@ -14,7 +14,6 @@ import 'package:service43/screens/sos_screen.dart';
 // todo: Refactoring code
 // todo: Realized BLoC pattern in app
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -28,14 +27,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: appName,
-      initialRoute: isAuth ? '/index' : '/signup',
+      initialRoute: isAuth ? HomeScreen.route : SignUpScreen.route,
       routes: {
-        '/signup': (_) => SignUpScreen(),
-        '/register': (_) => RegisterScreen(),
-        '/index': (_) => HomeScreen(),
-        '/order': (_) => OrderScreen(),
-        '/map': (_) => MapScreen(),
-        '/sos': (_) => SOSScreen(),
+        SignUpScreen.route:   (_) => SignUpScreen(),
+        RegisterScreen.route: (_) => RegisterScreen(),
+        HomeScreen.route:     (_) => HomeScreen(),
+        OrderScreen.route: 	  (_) => OrderScreen(),
+        MapScreen.route:      (_) => MapScreen(),
+        SOSScreen.route:      (_) => SOSScreen(),
       },
     );
   }

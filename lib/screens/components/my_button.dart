@@ -39,6 +39,6 @@ class MyButton extends StatelessWidget {
   Color _getButtonTheme(MyButtonTheme theme) {
     if (theme == MyButtonTheme.primary) return primaryColor;
     else if (theme == MyButtonTheme.secondary) return secondaryColor;
-    else throw Exception("Wrong type theme"); 
+    else throw Exception('Wrong type theme'); 
   }
 }

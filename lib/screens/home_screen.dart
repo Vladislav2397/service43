@@ -4,6 +4,8 @@ import 'package:service43/config.dart';
 import 'package:service43/screens/components/my_button.dart';
 
 class HomeScreen extends StatelessWidget {
+	static final route = '/home';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,7 +17,7 @@ class HomeScreen extends StatelessWidget {
             flex: 2,
             child: Center(
               child: Text(
-                auth.currentUser == null ? "unknown" : appName,
+                auth.currentUser == null ? 'unknown' : appName,
                 style: TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
@@ -33,21 +35,21 @@ class HomeScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 MyButton(
-                  btnText: "Заказать услугу",
+                  btnText: 'Заказать услугу',
                   btnPressFunc: () {
                     Navigator.pushNamed(context, '/order');
                   },
                   btnTheme: MyButtonTheme.primary,
                 ),
                 MyButton(
-                  btnText: "Посмотреть карту",
+                  btnText: 'Посмотреть карту',
                   btnPressFunc: () {
                     Navigator.pushNamed(context, '/map');
                   },
                   btnTheme: MyButtonTheme.primary,
                 ),
                 MyButton(
-                  btnText: "Экстренный вызов",
+                  btnText: 'Экстренный вызов',
                   btnPressFunc: () {
                     Navigator.pushNamed(context, '/sos');
                   },
