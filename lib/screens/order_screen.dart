@@ -4,6 +4,8 @@ import 'package:service43/config.dart';
 import 'package:service43/screens/components/my_dropdown_button.dart';
 import 'package:service43/screens/components/my_form_field.dart';
 import 'package:service43/screens/components/my_button.dart';
+import 'package:service43/screens/sign_up_screen.dart';
+
 
 class OrderScreen extends StatelessWidget {
 	static final route = '/order';
@@ -69,7 +71,13 @@ class OrderScreen extends StatelessWidget {
                           btnText: 'Выйти',
                           btnPressFunc: () {
                             auth.signOut();
-                            Navigator.of(context).pop();
+                            Navigator
+															.of(context)
+															.pushNamedAndRemoveUntil(
+																SignUpScreen.route, ModalRoute.withName(
+																	SignUpScreen.route
+																)
+															);
                           },
                           btnTheme: MyButtonTheme.secondary,
                         ),

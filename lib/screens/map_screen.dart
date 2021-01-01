@@ -5,6 +5,7 @@ import 'package:service43/screens/components/my_map_employes.dart';
 import 'package:service43/screens/model/employee.dart';
 import 'package:service43/screens/components/my_list_employes.dart';
 
+
 class MapScreen extends StatefulWidget {
   static final route = '/map';
 
@@ -18,14 +19,7 @@ class _MapScreenState extends State<MapScreen> {
   @override
   void initState() {
     super.initState();
-    futureEmployes = fetchEmployee();
-  }
-
-  Future<List<Employee>> fetchEmployee() async {
-    var response = await db.child('employes').once();
-    List<dynamic> mapEmployes = response.value;
-
-    return mapEmployes.map((obj) => Employee.fromMap(obj)).toList();
+    futureEmployes = employes;
   }
 
   @override

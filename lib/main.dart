@@ -9,10 +9,10 @@ import 'package:service43/screens/order_screen.dart';
 import 'package:service43/screens/map_screen.dart';
 import 'package:service43/screens/sos_screen.dart';
 
-// todo: registration with phone
-// todo: -> or email or google
+// todo: registration with phone or google
 // todo: Refactoring code
 // todo: Realized BLoC pattern in app
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

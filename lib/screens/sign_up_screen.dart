@@ -4,8 +4,9 @@ import 'package:service43/config.dart';
 import 'package:service43/screens/components/my_button.dart';
 import 'package:service43/screens/home_screen.dart';
 
+
 class SignUpScreen extends StatelessWidget {
-	static final route = '/sign-up';
+	static final route = '/';
   final _emailCtrl = TextEditingController();
   final _passwordCtrl = TextEditingController();
 

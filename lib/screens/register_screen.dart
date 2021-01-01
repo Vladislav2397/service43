@@ -3,9 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:service43/config.dart';
 import 'package:service43/screens/components/my_button.dart';
+import 'package:service43/screens/sign_up_screen.dart';
+
 
 class RegisterScreen extends StatefulWidget {
-	static final route = '/register';
+  static final route = '/register';
   @override
   _RegisterScreenState createState() => _RegisterScreenState();
 }
@@ -78,10 +80,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   try {
                     auth.createUserWithEmailAndPassword(
                         email: emailCtrl.text, password: passwordCtrl.text);
+                    print(auth.currentUser.email);
                   } catch (e) {
                     print(e);
                   }
-                  Navigator.popAndPushNamed(context, '/signin');
+                  Navigator.popAndPushNamed(context, SignUpScreen.route);
                 }
               },
               btnTheme: MyButtonTheme.primary,
@@ -119,6 +122,4 @@ class _RegisterScreenState extends State<RegisterScreen> {
       await user.sendEmailVerification();
     }
   }
-
-  sendCodeEmailVerify() {}
 }

@@ -3,6 +3,7 @@ import 'package:latlong/latlong.dart';
 import 'model.dart';
 
 class Employee extends Model {
+	// int id;
   String name;
   String job;
   bool isFree;
