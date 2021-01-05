@@ -13,11 +13,11 @@ class LoginData {
   var _email = '';
   var _password = '';
 
-	get email => this._email;
-	set email(String value) => this._email = value.toString().trim();
+  get email => this._email;
+  set email(String value) => this._email = value.toString().trim();
 
-	get password => this._password;
-	set password(String value) => this._password = value.toString().trim();
+  get password => this._password;
+  set password(String value) => this._password = value.toString().trim();
 }
 
 
@@ -81,18 +81,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
               MyButton(
                 btnText: 'Войти',
                 btnPressFunc: () {
-									printDebug([
-										'Is form validate:'
-										' ${_formKey.currentState.validate()}'
-									]);
-									if (_formKey.currentState.validate()) {
-										_formKey.currentState.save();
-										printDebug([
-											'Saved email text: ${_data.email}',
-											'Saved password text: ${_data.password}'
-										]);
-										signUp(_data.email, _data.password, context);
-                	}
+                  printDebug([
+                    'Is form validate:'
+                    ' ${_formKey.currentState.validate()}'
+                  ]);
+                  if (_formKey.currentState.validate()) {
+                    _formKey.currentState.save();
+                    printDebug([
+                      'Saved email text: ${_data.email}',
+                      'Saved password text: ${_data.password}'
+                    ]);
+                    signUp(_data.email, _data.password, context);
+                  }
               },
                 btnTheme: MyButtonTheme.primary,
               ),
@@ -113,21 +113,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   void signUp(String email, String password, BuildContext context) async {
 
-		// todo: Разделить эту функцию
+    // todo: Разделить эту функцию
 
     try {
       await auth.signInWithEmailAndPassword(
-				email: email, password: password
-			);
+        email: email, password: password
+      );
       if (!auth.currentUser.emailVerified) {
         mySnackBarWithButton(
-					context,
-					content: 'Email не верифицирован', 
-					buttonText: 'Отправить',
-					buttonPressFunc: () async {
-						await auth.currentUser.sendEmailVerification();
-					}
-				);
+          context,
+          content: 'Email не верифицирован', 
+          buttonText: 'Отправить',
+          buttonPressFunc: () async {
+            await auth.currentUser.sendEmailVerification();
+          }
+        );
         auth.currentUser.sendEmailVerification();
       } else {
         Navigator
@@ -137,28 +137,28 @@ class _SignUpScreenState extends State<SignUpScreen> {
           );
       }
     } on FirebaseAuthException catch (err) {
-			var message = 'Error';
-			switch (err.code) {
-				case 'invalid-email':
-					message = 'Адрес электронной почты недействителен';
-					break;
-				case 'user-disabled':
-					message = 'Пользователь, соответствующий данному'
-										' адресу электронной почты, отключен';
-					break;
-				case "wrong-password":
-					message = 'Пароль недействителен для данного'
-										' адреса электронной почты';
-					break;
-				case "user-not-found":
-					message = 'Нет пользователя, соответствующего'
-										' данному адресу электронной почты';
-					break;
-			}
+      var message = 'Error';
+      switch (err.code) {
+        case 'invalid-email':
+          message = 'Адрес электронной почты недействителен';
+          break;
+        case 'user-disabled':
+          message = 'Пользователь, соответствующий данному'
+                    ' адресу электронной почты, отключен';
+          break;
+        case "wrong-password":
+          message = 'Пароль недействителен для данного'
+                    ' адреса электронной почты';
+          break;
+        case "user-not-found":
+          message = 'Нет пользователя, соответствующего'
+                    ' данному адресу электронной почты';
+          break;
+      }
       mySnackBarText(context, message);
-			printDebug([message]);
+      printDebug([message]);
     } catch (err) {
-			print(err);
-		}
+      print(err);
+    }
   }
 }

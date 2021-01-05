@@ -8,7 +8,7 @@ import 'package:service43/screens/components/my_button.dart';
 
 class SOSScreen extends StatelessWidget {
   static final route = HomeScreen.route + '/sos';
-	final phoneCtrl = TextEditingController();
+  final phoneCtrl = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -25,13 +25,13 @@ class SOSScreen extends StatelessWidget {
                   Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 30),
                       child: TextFormField(
-												controller: phoneCtrl,
-												decoration: InputDecoration(
-													hintText: myPhone
-												),
-												textAlign: TextAlign.center,
-											)
-									),
+                        controller: phoneCtrl,
+                        decoration: InputDecoration(
+                          hintText: myPhone
+                        ),
+                        textAlign: TextAlign.center,
+                      )
+                  ),
                   Text('Оставьте свой номер для'),
                   Text('обратного вызова'),
                   SizedBox(height: 30),

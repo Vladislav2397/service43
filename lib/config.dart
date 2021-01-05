@@ -14,7 +14,7 @@ const myPhone = '+7(900)123-45-67';
 const myPhoneURL = 'tel://$myPhone';
 const emailExample = 'email_12345@domain.com';
 const passwordExample = 'password12345';
-const DEBUG = true;
+const DEBUG = false;
 
 DatabaseReference db = FirebaseDatabase.instance.reference();
 FirebaseAuth auth = FirebaseAuth.instance;

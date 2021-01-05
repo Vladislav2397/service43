@@ -10,7 +10,7 @@ import 'package:service43/screens/sos_screen.dart';
 
 
 class OrderScreen extends StatelessWidget {
-	static final route = HomeScreen.route + '/order';
+  static final route = HomeScreen.route + '/order';
 
   @override
   Widget build(BuildContext context) {
@@ -73,14 +73,14 @@ class OrderScreen extends StatelessWidget {
                           btnText: 'Выйти',
                           btnPressFunc: () {
                             auth.signOut();
-														if (DEBUG) {
-															print('');
-														}
+                            if (DEBUG) {
+                              print('');
+                            }
                             Navigator
-															.of(context)
-															.pushNamedAndRemoveUntil(
-																SignUpScreen.route, (route) => false
-															);
+                              .of(context)
+                              .pushNamedAndRemoveUntil(
+                                SignUpScreen.route, (route) => false
+                              );
                           },
                           btnTheme: MyButtonTheme.secondary,
                         ),
