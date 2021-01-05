@@ -1,18 +1,21 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import 'package:service43/config.dart';
 import 'package:service43/screens/components/my_map_employes.dart';
+import 'package:service43/screens/home_screen.dart';
 import 'package:service43/screens/model/employee.dart';
-import 'package:service43/screens/components/my_list_employes.dart';
-
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class MapScreen extends StatefulWidget {
-  static final route = '/map';
+  static final route = HomeScreen.route + '/map';
 
   @override
   _MapScreenState createState() => _MapScreenState();
 }
 
+/// Document string
 class _MapScreenState extends State<MapScreen> {
   Future<List<Employee>> futureEmployes;
 
@@ -26,32 +29,19 @@ class _MapScreenState extends State<MapScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white70,
-      body: Column(
-        children: <Widget>[
-          Expanded(
-              child: FutureBuilder<List<Employee>>(
-            future: futureEmployes,
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return MyMapEmployes(snapshot.data);
-              } else {
-                return Center(child: CircularProgressIndicator());
-              }
-            },
-          )),
-          Expanded(
-            child: FutureBuilder<List<Employee>>(
-              future: futureEmployes,
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return MyListEmployes(snapshot.data);
-                } else {
-                  return Center(child: CircularProgressIndicator());
-                }
-              },
-            ),
-          ),
-        ],
+      body: SlidingUpPanel(
+        // padding: EdgeInsets.symmetric(vertical: 30),
+        panel: SizedBox(child: Container()),
+        body: FutureBuilder<List<Employee>>(
+          future: futureEmployes,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return MyMapEmployes(snapshot.data);
+            } else {
+              return Center(child: CircularProgressIndicator());
+            }
+          },
+        ),
       ),
     );
   }

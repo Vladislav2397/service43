@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
 import 'package:service43/config.dart';
+import 'package:service43/screens/home_screen.dart';
+import 'package:service43/screens/sign_up_screen.dart';
 import 'package:service43/screens/components/my_dropdown_button.dart';
 import 'package:service43/screens/components/my_form_field.dart';
 import 'package:service43/screens/components/my_button.dart';
-import 'package:service43/screens/sign_up_screen.dart';
+import 'package:service43/screens/sos_screen.dart';
 
 
 class OrderScreen extends StatelessWidget {
-	static final route = '/order';
+	static final route = HomeScreen.route + '/order';
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +65,7 @@ class OrderScreen extends StatelessWidget {
                         MyButton(
                           btnText: 'Заказать звонок',
                           btnPressFunc: () {
-                            Navigator.pushNamed(context, '/sos');
+                            Navigator.pushNamed(context, SOSScreen.route);
                           },
                           btnTheme: MyButtonTheme.secondary,
                         ),
@@ -71,12 +73,13 @@ class OrderScreen extends StatelessWidget {
                           btnText: 'Выйти',
                           btnPressFunc: () {
                             auth.signOut();
+														if (DEBUG) {
+															print('');
+														}
                             Navigator
 															.of(context)
 															.pushNamedAndRemoveUntil(
-																SignUpScreen.route, ModalRoute.withName(
-																	SignUpScreen.route
-																)
+																SignUpScreen.route, (route) => false
 															);
                           },
                           btnTheme: MyButtonTheme.secondary,

@@ -2,14 +2,17 @@ import 'package:flutter/material.dart';
 
 import 'package:service43/config.dart';
 import 'package:service43/screens/components/my_button.dart';
-
+import 'package:service43/screens/components/my_logo.dart';
+import 'package:service43/screens/map_screen.dart';
+import 'package:service43/screens/order_screen.dart';
+import 'package:service43/screens/sos_screen.dart';
 
 class HomeScreen extends StatelessWidget {
-	static final route = '/home';
+  static final route = '/home';
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return auth.currentUser.emailVerified ? Scaffold(
       backgroundColor: Colors.white10,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -17,17 +20,8 @@ class HomeScreen extends StatelessWidget {
           Expanded(
             flex: 2,
             child: Center(
-              child: Text(
-                auth.currentUser == null ? 'unknown' : appName,
-                style: TextStyle(
-                    fontSize: 32,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.green[800]),
-              ),
+              child: MyLogo(appName),
             ),
-          ),
-          SizedBox(
-            height: 50,
           ),
           Expanded(
             flex: 1,
@@ -38,21 +32,21 @@ class HomeScreen extends StatelessWidget {
                 MyButton(
                   btnText: 'Заказать услугу',
                   btnPressFunc: () {
-                    Navigator.pushNamed(context, '/order');
+                    Navigator.pushNamed(context, OrderScreen.route);
                   },
                   btnTheme: MyButtonTheme.primary,
                 ),
                 MyButton(
                   btnText: 'Посмотреть карту',
                   btnPressFunc: () {
-                    Navigator.pushNamed(context, '/map');
+                    Navigator.pushNamed(context, MapScreen.route);
                   },
                   btnTheme: MyButtonTheme.primary,
                 ),
                 MyButton(
                   btnText: 'Экстренный вызов',
                   btnPressFunc: () {
-                    Navigator.pushNamed(context, '/sos');
+                    Navigator.pushNamed(context, SOSScreen.route);
                   },
                   btnTheme: MyButtonTheme.secondary,
                 ),
@@ -61,6 +55,6 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-    );
+    ) : CircularProgressIndicator();
   }
 }

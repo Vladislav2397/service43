@@ -26,12 +26,16 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.0
+  sliding_up_panel: ^1.0.2
   flutter_map: any
   latlong: any
   location: any
   url_launcher: any
 
-# Firebase packages
+  # Google maps
+  google_maps_flutter: ^1.0.6
+
+  # Firebase packages
   firebase_core: ^0.5.3
   firebase_analytics: ^5.0.2
   firebase_auth: ^0.18.4+1

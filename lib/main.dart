@@ -9,32 +9,33 @@ import 'package:service43/screens/order_screen.dart';
 import 'package:service43/screens/map_screen.dart';
 import 'package:service43/screens/sos_screen.dart';
 
-// todo: registration with phone or google
+// todo: Registration with phone or google
 // todo: Refactoring code
 // todo: Realized BLoC pattern in app
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  print('Auth: $isAuth');
   runApp(MyApp());
 }
-
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: appName,
-      initialRoute: isAuth ? HomeScreen.route : SignUpScreen.route,
+
+      initialRoute: checkAuth()
+        ? HomeScreen.route
+        : SignUpScreen.route,
+
       routes: {
         SignUpScreen.route:   (_) => SignUpScreen(),
         RegisterScreen.route: (_) => RegisterScreen(),
-        HomeScreen.route:     (_) => HomeScreen(),
-        OrderScreen.route: 	  (_) => OrderScreen(),
-        MapScreen.route:      (_) => MapScreen(),
-        SOSScreen.route:      (_) => SOSScreen(),
+        HomeScreen.route: 		(_) => HomeScreen(),
+        OrderScreen.route: 		(_) => OrderScreen(),
+        MapScreen.route: 			(_) => MapScreen(),
+        SOSScreen.route: 			(_) => SOSScreen(),
       },
     );
   }
