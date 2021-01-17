@@ -56,6 +56,6 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-    ) : CircularProgressIndicator();
+    ) : Center(child: CircularProgressIndicator());
   }
 }

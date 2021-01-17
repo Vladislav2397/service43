@@ -27,9 +27,6 @@ dependencies:
 
   cupertino_icons: ^1.0.0
   sliding_up_panel: ^1.0.2
-  flutter_map: any
-  latlong: any
-  location: any
   url_launcher: any
 
   # Google maps
@@ -37,10 +34,8 @@ dependencies:
 
   # Firebase packages
   firebase_core: ^0.5.3
-  firebase_analytics: ^5.0.2
   firebase_auth: ^0.18.4+1
   firebase_database: ^4.4.0
-  cloud_firestore: ^0.14.4
 
 
 dev_dependencies:
