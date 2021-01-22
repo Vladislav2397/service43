@@ -1,100 +1,218 @@
 import 'package:flutter/material.dart';
 
 import 'package:service43/config.dart';
+import 'package:service43/screens/components/base_button.dart';
+import 'package:service43/screens/components/my_snack_bars.dart';
+import 'package:service43/screens/components/my_text_form_field.dart';
 import 'package:service43/screens/home_screen.dart';
-import 'package:service43/screens/sign_up_screen.dart';
-import 'package:service43/screens/components/my_dropdown_button.dart';
-import 'package:service43/screens/components/my_form_field.dart';
-import 'package:service43/screens/components/my_button.dart';
 import 'package:service43/screens/sos_screen.dart';
 
 
-class OrderScreen extends StatelessWidget {
+class OrderData {
+  String _job;
+  String _street = '';
+  String _house = '';
+  String _room = '';
+  List<String> _jobs = [
+    'Сантехнические работы',
+    'Электротехнические работы',
+    'Монтажные работы'
+  ];
+
+  String get job => this._job;
+  String get street => this._street;
+  String get house => this._house;
+  String get room => this._room;
+
+  // ? Подумать насчет читаемости
+  List<DropdownMenuItem<String>> get jobs =>
+    this._jobs.map<DropdownMenuItem<String>>((String value) {
+      return DropdownMenuItem<String>(
+        value: value,
+        child: Text(value),
+      );
+    }).toList();
+
+  set job(String value) {
+    this._job = value.trim().toString();
+  }
+
+  set street(String value) {
+    this._street = value.trim().toString();
+  }
+  
+  set house(String value) {
+    this._house = value.trim().toString();
+  }
+  
+  set room(String value) {
+    this._room = value.trim().toString();
+  }
+}
+
+
+class OrderScreen extends StatefulWidget {
   static final route = HomeScreen.route + '/order';
+
+  @override
+  _OrderScreenState createState() => _OrderScreenState();
+}
+
+class _OrderScreenState extends State<OrderScreen> {
+  var _formKey = GlobalKey<FormState>();
+  var _data = OrderData();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white70,
       body: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 25),
         child: Form(
+          key: _formKey,
           child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Expanded(
-                  child: Center(
-                    child: MyDropdownButton(
-                      items: [
-                        'Сантехнические работы',
-                        'Электротехнические работы',
-                        'Монтажные работы'
-                      ],
-                      hintText: 'Выберите услугу',
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Expanded(
+                flex: 1,
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                    child: DropdownButtonFormField(
+                      hint: Text(
+                        'Выберите услугу',
+                        style: TextStyle(
+                          color: secondaryColor
+                        ),
+                      ),
+                      dropdownColor: primaryColor,
+                      focusColor: secondaryColor,
+                      iconEnabledColor: secondaryColor,
+                      style: TextStyle(
+                        color: secondaryColor
+                      ),
+                      decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: secondaryColor
+                          )
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: secondaryColor
+                          )
+                        )
+                      ),
+                      value: _data.job,
+                      items: _data.jobs,
+                      onChanged: (dynamic value) {
+                        _data.job = value;
+                      },
+                      validator: dropdownValidator,
+                      onSaved: (dynamic value) {
+                        _data.job = value;
+                      },
                     ),
                   ),
                 ),
-                Expanded(
-                  flex: 2,
-                  child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+              ),
+              Expanded(
+                flex: 2,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    MyTextFormField(
+                      labelText: 'Улица',
+                      validator: (String value) {
+                        return value.isEmpty
+                          ? 'Input correct data'
+                          : null;
+                      },
+                      onSaved: (String value) {
+                        _data.street = value;
+                      },
+                    ),
+                    SizedBox(height: 20),
+                    Row(
                       children: <Widget>[
-                        MyFormField('Улица'),
-                        Row(
-                          children: <Widget>[
-                            Expanded(child: MyFormField('Дом')),
-                            SizedBox(width: 30),
-                            Expanded(child: MyFormField('Квартира')),
-                          ],
+                        Expanded(
+                          child: MyTextFormField(
+                            labelText: 'Дом',
+                            validator: (String value) {
+                              return value.isEmpty
+                                ? 'Input correct data'
+                                : null;
+                            },
+                            onSaved: (String value) {
+                              _data.house = value;
+                            },
+                          ),
+                        ),
+                        SizedBox(width: 30),
+                        Expanded(
+                          child: MyTextFormField(
+                            inputType: TextInputType.number,
+                            labelText: 'Квартира',
+                            validator: (String value) {
+                              return value.isEmpty
+                                ? 'Input correct data'
+                                : null;
+                            },
+                            onSaved: (String value) {
+                              _data.room = value;
+                            },
+                          ),
                         ),
                       ],
                     ),
-                  ),
+                  ],
                 ),
-                Expanded(
-                  flex: 2,
-                  child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        MyButton(
-                          btnText: 'Заказать услугу',
-                          btnPressFunc: this.btnPress,
-                          btnTheme: MyButtonTheme.primary,
-                        ),
-                        MyButton(
-                          btnText: 'Заказать звонок',
-                          btnPressFunc: () {
-                            Navigator.pushNamed(context, SOSScreen.route);
-                          },
-                          btnTheme: MyButtonTheme.secondary,
-                        ),
-                        MyButton(
-                          btnText: 'Выйти',
-                          btnPressFunc: () {
-                            auth.signOut();
-                            if (DEBUG) {
-                              print('');
-                            }
-                            Navigator
-                              .of(context)
-                              .pushNamedAndRemoveUntil(
-                                SignUpScreen.route, (route) => false
-                              );
-                          },
-                          btnTheme: MyButtonTheme.secondary,
-                        ),
-                      ],
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 25, vertical: 10
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    BaseButton(
+                      text: 'Заказать услугу',
+                      onPressed: this.sendRequest,
                     ),
-                  ),
+                    SizedBox(height: 20),
+                    BaseButton(
+                      text: 'Заказать звонок',
+                      color: accidentalColor,
+                      onPressed: () {
+												Navigator.pushNamed(context, SOSScreen.route);
+											},
+                    ),
+                  ],
                 ),
-              ]),
+              ),
+            ]
+          ),
         ),
       ),
     );
   }
 
-  btnPress() {
-    print('ButtonPress');
+  sendRequest() async {
+    try {
+      checkAndSaveForm(_formKey);
+      sendEmail(
+        title: 'Service43 - Заказ',
+        content: '''
+          Пользователь: ${user?.phoneNumber}
+          Услуга: ${_data.job}
+          Улица: ${_data.street}
+          Дом: ${_data.house}
+          Квартира: ${_data.room}
+        '''
+      );
+      mySnackBarText(context, 'Заявка отправлена');
+    } catch (err) {
+      print(err);
+      mySnackBarText(context, 'Заявка не отправлена');
+    }
   }
 }

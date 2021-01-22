@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:service43/config.dart';
-import 'package:service43/screens/components/my_button.dart';
+import 'package:service43/screens/components/base_button.dart';
+// import 'package:service43/screens/components/my_button.dart';
 import 'package:service43/screens/components/my_logo.dart';
 import 'package:service43/screens/map_screen.dart';
 import 'package:service43/screens/order_screen.dart';
@@ -13,8 +14,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return auth.currentUser.emailVerified ? Scaffold(
-      backgroundColor: Colors.white10,
+    return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
@@ -26,36 +26,45 @@ class HomeScreen extends StatelessWidget {
           ),
           Expanded(
             flex: 1,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                MyButton(
-                  btnText: 'Заказать услугу',
-                  btnPressFunc: () {
-                    Navigator.pushNamed(context, OrderScreen.route);
-                  },
-                  btnTheme: MyButtonTheme.primary,
-                ),
-                MyButton(
-                  btnText: 'Посмотреть карту',
-                  btnPressFunc: () {
-                    Navigator.pushNamed(context, MapScreen.route);
-                  },
-                  btnTheme: MyButtonTheme.primary,
-                ),
-                MyButton(
-                  btnText: 'Экстренный вызов',
-                  btnPressFunc: () {
-                    Navigator.pushNamed(context, SOSScreen.route);
-                  },
-                  btnTheme: MyButtonTheme.secondary,
-                ),
-              ],
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+								horizontal: 50.0
+							),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  BaseButton(
+										isLong: true,
+                    text: 'Заказать услугу',
+										textSize: 20,
+                    onPressed: () {
+                      Navigator.pushNamed(context, OrderScreen.route);
+                    },
+                  ),
+                  BaseButton(
+										isLong: true,
+                    text: 'Посмотреть карту',
+										textSize: 20,
+                    onPressed: () {
+                      Navigator.pushNamed(context, MapScreen.route);
+                    },
+                  ),
+                  BaseButton(
+										isLong: true,
+                    text: 'Экстренный вызов',
+										color: accidentalColor,
+										textSize: 20,
+                    onPressed: () {
+                      Navigator.pushNamed(context, SOSScreen.route);
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         ],
       ),
-    ) : Center(child: CircularProgressIndicator());
+    );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:service43/config.dart';
 
 
 class MyLogo extends StatelessWidget {
@@ -13,7 +14,7 @@ class MyLogo extends StatelessWidget {
       style: TextStyle(
         fontSize: 32,
         fontWeight: FontWeight.bold,
-        color: Colors.green[800]
+        color: accidentalColor
       ),
     );
   }

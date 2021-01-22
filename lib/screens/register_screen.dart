@@ -129,7 +129,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           break;
                       }
                       mySnackBarText(context, message);
-                      printDebug([message]);
                     }
                     Navigator.pop(context);
                   }
