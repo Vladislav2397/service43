@@ -3,7 +3,6 @@ import 'package:firebase_core/firebase_core.dart';
 
 import 'package:service43/config.dart';
 import 'package:service43/screens/sign_up_screen.dart';
-import 'package:service43/screens/register_screen.dart';
 import 'package:service43/screens/home_screen.dart';
 import 'package:service43/screens/order_screen.dart';
 import 'package:service43/screens/map_screen.dart';
@@ -28,7 +27,7 @@ class MyApp extends StatelessWidget {
       title: appName,
       theme: ThemeData(
         scaffoldBackgroundColor: darkColor,
-				buttonColor: Colors.white
+        buttonColor: Colors.white
       ),
       initialRoute: isAuth
         ? HomeScreen.route
@@ -36,7 +35,6 @@ class MyApp extends StatelessWidget {
 
       routes: {
         SignUpScreen.route:   (_) => SignUpScreen(),
-        RegisterScreen.route: (_) => RegisterScreen(),
         HomeScreen.route:     (_) => HomeScreen(),
         OrderScreen.route:    (_) => OrderScreen(),
         MapScreen.route:      (_) => MapScreen(),

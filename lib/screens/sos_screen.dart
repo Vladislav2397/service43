@@ -17,8 +17,8 @@ class SOSScreen extends StatelessWidget {
       body: Form(
         child: Padding(
           padding: const EdgeInsets.symmetric(
-						horizontal: 40.0
-					),
+            horizontal: 40.0
+          ),
           child: Column(
             children: <Widget>[
               Expanded(
@@ -27,19 +27,19 @@ class SOSScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     MyText(
-											'Оставьте свой номер для\nобратного вызова',
-											textAlign: TextAlign.center,
-										),
+                      'Оставьте свой номер для\nобратного вызова',
+                      textAlign: TextAlign.center,
+                    ),
                     SizedBox(height: 30),
                     BaseButton(
                       text: 'Оставить',
                       onPressed: () {
-												sendEmail(
-													context: context,
-													title: 'Service43 - Заявка на обратный вызов',
-													content: 'Номер: ${user?.phoneNumber}'
-												);
-											},
+                        sendEmail(
+                          context: context,
+                          title: 'Service43 - Заявка на обратный вызов',
+                          content: 'Номер: ${user?.phoneNumber}'
+                        );
+                      },
                     )
                   ],
                 ),
@@ -57,19 +57,19 @@ class SOSScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     MyText(
-											'Позвоните нам',
-											fontSize: 18
-										),
-										SizedBox(height: 10),
+                      'Позвоните нам',
+                      fontSize: 18
+                    ),
+                    SizedBox(height: 10),
                     MyText(
-											myPhone,
-											fontSize: 20,
-											fontWeight: FontWeight.bold
-										),
+                      myPhone,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold
+                    ),
                     SizedBox(height: 30),
                     BaseButton(
                       text: 'Позвонить',
-											color: accidentalColor,
+                      color: accidentalColor,
                       onPressed: this._launchCaller,
                     )
                   ],

@@ -17,7 +17,6 @@ class MapScreen extends StatefulWidget {
 }
 
 
-/// Document string
 class _MapScreenState extends State<MapScreen> {
   Future<List<Employee>> futureEmployes;
 
@@ -32,7 +31,6 @@ class _MapScreenState extends State<MapScreen> {
     return Scaffold(
       backgroundColor: Colors.white70,
       body: SlidingUpPanel(
-        // padding: EdgeInsets.symmetric(vertical: 30),
         panel: SizedBox(child: Container()),
         body: FutureBuilder<List<Employee>>(
           future: futureEmployes,

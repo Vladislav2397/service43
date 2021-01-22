@@ -183,8 +183,8 @@ class _OrderScreenState extends State<OrderScreen> {
                       text: 'Заказать звонок',
                       color: accidentalColor,
                       onPressed: () {
-												Navigator.pushNamed(context, SOSScreen.route);
-											},
+                        Navigator.pushNamed(context, SOSScreen.route);
+                      },
                     ),
                   ],
                 ),

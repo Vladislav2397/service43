@@ -62,14 +62,14 @@ void checkAndSaveForm(GlobalKey<FormState> formKey) {
   formKey.currentState.validate()
     ? formKey.currentState.save()
     : throw FirebaseAuthException(
-			code: 'not-valid-form',
-			message: 'The form was not valid');
+      code: 'not-valid-form',
+      message: 'The form was not valid');
 }
 
 void sendEmail({
-	BuildContext context,
-	String title,
-	String content
+  BuildContext context,
+  String title,
+  String content
 }) async {
   final message = Message()
     ..from = Address(mailer['email'])
@@ -80,7 +80,7 @@ void sendEmail({
   try {
     await send(message, smtpServer);
   } catch (err) {
-		mySnackBarText(context, err);
+    mySnackBarText(context, err);
   }
 }
 

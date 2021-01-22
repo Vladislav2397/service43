@@ -5,14 +5,17 @@ import 'package:service43/config.dart';
 import 'package:service43/screens/components/base_button.dart';
 import 'package:service43/screens/components/my_logo.dart';
 import 'package:service43/screens/components/my_snack_bars.dart';
+import 'package:service43/screens/components/my_text.dart';
 import 'package:service43/screens/components/my_text_form_field.dart';
 import 'package:service43/screens/home_screen.dart';
 
 
 class LoginData {
-  var _phone = '';
+  String _phone = '';
+  bool _isPrivacyPolicy = false;
+  bool _isTermsOfUse = false;
 
-  get phone => this._phone;
+  String get phone => this._phone;
   set phone(String value) => this._phone = value.toString().trim();
 }
 
@@ -45,23 +48,51 @@ class _SignUpScreenState extends State<SignUpScreen> {
               SizedBox(height: 100),
               MyTextFormField(
                 inputType: phoneType,
-								hintText: phoneExample,
-								labelText: phoneLabel,
+                hintText: phoneExample,
+                labelText: phoneLabel,
                 validator: phoneValidator,
                 onSaved: (String value) {
                   _data.phone = value;
                 },
               ),
-              SizedBox(height: 50),
+              Row(
+                children: [
+                  Checkbox(
+                    value: _data._isPrivacyPolicy,
+                    onChanged: (bool value) {
+                      setState(() {
+                        _data._isPrivacyPolicy = value;
+                      });
+                    }
+                  ),
+                  MyText(
+                    'Я принимаю\nПолитику конфиденциальности'
+                  )
+                ],
+              ),
+              Row(
+                children: [
+                  Checkbox(
+                    value: _data._isTermsOfUse,
+                    onChanged: (bool value) {
+                      setState(() {
+                        _data._isTermsOfUse = value;
+                      });
+                    }
+                  ),
+                  MyText(
+                    'Я принимаю\nУсловия использования'
+                  )
+                ],
+              ),
               BaseButton(
                 text: 'Войти',
                 onPressed: () {
-                  try {
+                  if (_data._isPrivacyPolicy && _data._isTermsOfUse) {
                     checkAndSaveForm(_formKey);
                     signUp(context, _data.phone);
-                  } catch (err) {
-                    mySnackBarText(context, 'Вход не удался');
-                    print(err);
+                  } else {
+                    mySnackBarText(context, 'Обязательно принятие условий');
                   }
                 },
               ),
@@ -73,7 +104,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   void signUp(BuildContext context, String phone) async {
-
     await auth.verifyPhoneNumber(
       phoneNumber: phone,
       verificationCompleted: (PhoneAuthCredential credential) async {
@@ -100,7 +130,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ? Navigator.of(context).pushReplacementNamed(HomeScreen.route)
             : mySnackBarText(context, 'Error');
         } else {
-          return;
+          return null;
         }
       },
       codeAutoRetrievalTimeout: (String verifyId) {
