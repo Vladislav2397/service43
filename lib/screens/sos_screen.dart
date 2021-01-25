@@ -62,7 +62,7 @@ class SOSScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 10),
                     MyText(
-                      myPhone,
+                      phoneNumber,
                       fontSize: 20,
                       fontWeight: FontWeight.bold
                     ),
@@ -83,9 +83,9 @@ class SOSScreen extends StatelessWidget {
   }
 
   void _launchCaller() async {
-    if (await canLaunch(myPhoneURL))
-      await launch(myPhoneURL);
+    if (await canLaunch(phoneURL))
+      await launch(phoneURL);
     else
-      throw 'Could not launch $myPhoneURL';
+      throw 'Could not launch $phoneURL';
   }
 }

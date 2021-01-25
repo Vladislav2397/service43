@@ -13,10 +13,14 @@ import 'package:service43/screens/home_screen.dart';
 class LoginData {
   String _phone = '';
   bool _isPrivacyPolicy = false;
-  bool _isTermsOfUse = false;
 
   String get phone => this._phone;
   set phone(String value) => this._phone = value.toString().trim();
+
+	bool get isPrivacyPolicy => this._isPrivacyPolicy;
+	set isPrivacyPolicy(bool value) {
+		this._isPrivacyPolicy = value;
+	}
 }
 
 
@@ -52,17 +56,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 labelText: phoneLabel,
                 validator: phoneValidator,
                 onSaved: (String value) {
-                  _data.phone = value;
+                  _data.phone = '+' + value;
                 },
               ),
+              SizedBox(height: 10),
               Row(
                 children: [
                   Checkbox(
                     value: _data._isPrivacyPolicy,
                     onChanged: (bool value) {
-                      setState(() {
-                        _data._isPrivacyPolicy = value;
-                      });
+											setState(() {
+                      _data.isPrivacyPolicy = value;
+											});
                     }
                   ),
                   MyText(
@@ -70,25 +75,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   )
                 ],
               ),
-              Row(
-                children: [
-                  Checkbox(
-                    value: _data._isTermsOfUse,
-                    onChanged: (bool value) {
-                      setState(() {
-                        _data._isTermsOfUse = value;
-                      });
-                    }
-                  ),
-                  MyText(
-                    'Я принимаю\nУсловия использования'
-                  )
-                ],
-              ),
+              SizedBox(height: 10),
               BaseButton(
                 text: 'Войти',
                 onPressed: () {
-                  if (_data._isPrivacyPolicy && _data._isTermsOfUse) {
+                  if (_data.isPrivacyPolicy) {
                     checkAndSaveForm(_formKey);
                     signUp(context, _data.phone);
                   } else {

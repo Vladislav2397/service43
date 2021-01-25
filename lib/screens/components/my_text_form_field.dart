@@ -27,6 +27,11 @@ class MyTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       keyboardType: this.inputType,
+      validator: this.validator,
+      onSaved: this.onSaved,
+      style: TextStyle(
+        color: this.textColor
+      ),
       decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
@@ -47,11 +52,6 @@ class MyTextFormField extends StatelessWidget {
           color: this.labelColor
         )
       ),
-      style: TextStyle(
-        color: this.textColor
-      ),
-      validator: this.validator,
-      onSaved: this.onSaved,
     );
   }
 }

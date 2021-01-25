@@ -7,15 +7,11 @@ import 'package:service43/screens/components/my_snack_bars.dart';
 
 import 'package:service43/screens/model/employee.dart';
 
-const appName = 'Service43';
+const appName = 'Услуги.Киров';
 const databaseURL = 'https://service43-64544-default-rtdb.firebaseio.com/';
-const myPhone = '+7(900)123-45-67';
-const myPhoneURL = 'tel://$myPhone';
-const emailExample = 'email_12345@domain.com';
-const passwordExample = 'password12345';
 
 const phoneLabel = 'Телефон';
-const phoneExample = '+79001234567';
+const phoneExample = '79001234567';
 const phoneNumber = '+7(900)123-45-67';
 const phoneURL = 'tel://$phoneNumber';
 const phoneType = TextInputType.number;
@@ -35,21 +31,12 @@ const mailer = {
 // ignore: deprecated_member_use
 final smtpServer = gmail(mailer['email'], mailer['password']);
 
-const DEBUG = true;
-
 // Common getters
 FirebaseAuth get auth => FirebaseAuth.instance;
 User get user => auth.currentUser;
 DatabaseReference get db => FirebaseDatabase.instance.reference();
 Future<List<Employee>> get employes => fetchEmployee();
 bool get isAuth => user != null;
-
-printDebug({List<String> listData, String title}) {
-  if (DEBUG) {
-    if (title != null) print(title);
-    for (var arg in listData) print(arg);
-  }
-}
 
 Future<List<Employee>> fetchEmployee() async {
   var response = await db.child('employes').once();
@@ -86,7 +73,7 @@ void sendEmail({
 
 String phoneValidator(String value) {
   return value.isEmpty || value.length <= 5
-    ? 'Введите коректный пароль'
+    ? 'Введите коректный номер'
     : null;
 }
 
