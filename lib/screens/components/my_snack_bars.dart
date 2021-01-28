@@ -6,6 +6,14 @@ mySnackBarText(BuildContext context, String content) {
   );
 }
 
+mySnackBarTextSuccess(BuildContext context) {
+  mySnackBarText(context, 'Заявка отправлена');
+}
+
+mySnackBarTextError(BuildContext context) {
+  mySnackBarText(context, 'Заявка не отправлена');
+}
+
 mySnackBarWithButton(
   BuildContext context,
   { String content,

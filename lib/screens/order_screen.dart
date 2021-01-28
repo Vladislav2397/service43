@@ -8,7 +8,7 @@ import 'package:service43/screens/home_screen.dart';
 import 'package:service43/screens/sos_screen.dart';
 
 
-class OrderData {
+class _OrderData {
   String _job;
   String _street = '';
   String _house = '';
@@ -23,6 +23,14 @@ class OrderData {
   String get street => this._street;
   String get house => this._house;
   String get room => this._room;
+  String get sendMessage => 
+    '''
+      Пользователь: ${user?.phoneNumber}
+      Услуга: $job
+      Улица: $street
+      Дом: $house
+      Квартира: $room
+    ''';
 
   // ? Подумать насчет читаемости
   List<DropdownMenuItem<String>> get jobs =>
@@ -32,6 +40,7 @@ class OrderData {
         child: Text(value),
       );
     }).toList();
+
 
   set job(String value) {
     this._job = value.trim().toString();
@@ -60,7 +69,7 @@ class OrderScreen extends StatefulWidget {
 
 class _OrderScreenState extends State<OrderScreen> {
   var _formKey = GlobalKey<FormState>();
-  var _data = OrderData();
+  var _data = _OrderData();
 
   @override
   Widget build(BuildContext context) {
@@ -122,11 +131,7 @@ class _OrderScreenState extends State<OrderScreen> {
                   children: <Widget>[
                     MyTextFormField(
                       labelText: 'Улица',
-                      validator: (String value) {
-                        return value.isEmpty
-                          ? 'Input correct data'
-                          : null;
-                      },
+                      validator: textValidator,
                       onSaved: (String value) {
                         _data.street = value;
                       },
@@ -137,11 +142,7 @@ class _OrderScreenState extends State<OrderScreen> {
                         Expanded(
                           child: MyTextFormField(
                             labelText: 'Дом',
-                            validator: (String value) {
-                              return value.isEmpty
-                                ? 'Input correct data'
-                                : null;
-                            },
+                            validator: textValidator,
                             onSaved: (String value) {
                               _data.house = value;
                             },
@@ -152,11 +153,7 @@ class _OrderScreenState extends State<OrderScreen> {
                           child: MyTextFormField(
                             inputType: TextInputType.number,
                             labelText: 'Квартира',
-                            validator: (String value) {
-                              return value.isEmpty
-                                ? 'Input correct data'
-                                : null;
-                            },
+                            validator: textValidator,
                             onSaved: (String value) {
                               _data.room = value;
                             },
@@ -201,18 +198,11 @@ class _OrderScreenState extends State<OrderScreen> {
       checkAndSaveForm(_formKey);
       sendEmail(
         title: 'Service43 - Заказ',
-        content: '''
-          Пользователь: ${user?.phoneNumber}
-          Услуга: ${_data.job}
-          Улица: ${_data.street}
-          Дом: ${_data.house}
-          Квартира: ${_data.room}
-        '''
+        content: _data.sendMessage
       );
-      mySnackBarText(context, 'Заявка отправлена');
+      mySnackBarTextSuccess(context);
     } catch (err) {
-      print(err);
-      mySnackBarText(context, 'Заявка не отправлена');
+      mySnackBarTextSuccess(context);
     }
   }
 }

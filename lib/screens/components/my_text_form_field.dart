@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:service43/config.dart';
 
 class MyTextFormField extends StatelessWidget {
+  final TextEditingController controller;
   final TextInputType inputType;
   final String hintText;
   final Color hintColor;
@@ -11,14 +12,17 @@ class MyTextFormField extends StatelessWidget {
   final Color textColor;
   final Function validator;
   final Function onSaved;
+  final String initialValue;
 
   MyTextFormField({
     Key key,
     this.inputType,
     this.onSaved,
+    this.initialValue,
     this.hintText,
     this.labelText,
     this.validator,
+    this.controller,
     this.hintColor = secondaryColor,
     this.labelColor = secondaryColor,
     this.textColor = secondaryColor,
@@ -27,8 +31,10 @@ class MyTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       keyboardType: this.inputType,
+      controller: this.controller,
       validator: this.validator,
       onSaved: this.onSaved,
+      initialValue: this.initialValue,
       style: TextStyle(
         color: this.textColor
       ),
@@ -41,6 +47,11 @@ class MyTextFormField extends StatelessWidget {
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
             color: secondaryColor
+          )
+        ),
+        errorBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.red
           )
         ),
         hintText: this.hintText,

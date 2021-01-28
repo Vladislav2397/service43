@@ -3,14 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:service43/config.dart';
 import 'package:service43/screens/components/base_button.dart';
 import 'package:service43/screens/components/my_logo.dart';
-import 'package:service43/screens/map_screen.dart';
+import 'package:service43/screens/components/my_snack_bars.dart';
+// import 'package:service43/screens/map_screen.dart';
 import 'package:service43/screens/order_screen.dart';
 import 'package:service43/screens/sos_screen.dart';
 
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   static final route = '/home';
 
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,29 +40,20 @@ class HomeScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   BaseButton(
-                    isLong: true,
                     text: 'Заказать услугу',
-                    textSize: 20,
-                    onPressed: () {
-                      Navigator.pushNamed(context, OrderScreen.route);
-                    },
+                    onPressed: navigation(OrderScreen.route),
                   ),
                   BaseButton(
-                    isLong: true,
                     text: 'Посмотреть карту',
-                    textSize: 20,
                     onPressed: () {
-                      Navigator.pushNamed(context, MapScreen.route);
+                      mySnackBarText(context, 'В разработке');
+                      // Navigator.pushNamed(context, MapScreen.route);
                     },
                   ),
                   BaseButton(
-                    isLong: true,
                     text: 'Экстренный вызов',
                     color: accidentalColor,
-                    textSize: 20,
-                    onPressed: () {
-                      Navigator.pushNamed(context, SOSScreen.route);
-                    },
+                    onPressed: navigation(SOSScreen.route),
                   ),
                 ],
               ),
@@ -65,5 +62,9 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  navigation(String route) {
+    return () => Navigator.of(context).pushNamed(route);
   }
 }

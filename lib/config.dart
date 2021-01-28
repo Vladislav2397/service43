@@ -9,6 +9,7 @@ import 'package:service43/screens/model/employee.dart';
 
 const appName = 'Услуги.Киров';
 const databaseURL = 'https://service43-64544-default-rtdb.firebaseio.com/';
+const errorLabel = 'Ошибка';
 
 const phoneLabel = 'Телефон';
 const phoneExample = '79001234567';
@@ -50,7 +51,8 @@ void checkAndSaveForm(GlobalKey<FormState> formKey) {
     ? formKey.currentState.save()
     : throw FirebaseAuthException(
       code: 'not-valid-form',
-      message: 'The form was not valid');
+      message: 'The form was not valid'
+    );
 }
 
 void sendEmail({
@@ -67,12 +69,12 @@ void sendEmail({
   try {
     await send(message, smtpServer);
   } catch (err) {
-    mySnackBarText(context, err);
+    mySnackBarText(context, 'Error');
   }
 }
 
 String phoneValidator(String value) {
-  return value.isEmpty || value.length <= 5
+  return value.isEmpty || value.length != 11
     ? 'Введите коректный номер'
     : null;
 }
@@ -80,5 +82,11 @@ String phoneValidator(String value) {
 String dropdownValidator(dynamic value) {
   return value == null
     ? 'Выберите услугу из списка'
+    : null;
+}
+
+String textValidator(String value) {
+  return value.isEmpty
+    ? 'Введите корректное значение'
     : null;
 }

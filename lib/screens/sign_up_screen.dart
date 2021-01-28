@@ -10,17 +10,17 @@ import 'package:service43/screens/components/my_text_form_field.dart';
 import 'package:service43/screens/home_screen.dart';
 
 
-class LoginData {
+class _LoginData {
   String _phone = '';
   bool _isPrivacyPolicy = false;
 
   String get phone => this._phone;
   set phone(String value) => this._phone = value.toString().trim();
 
-	bool get isPrivacyPolicy => this._isPrivacyPolicy;
-	set isPrivacyPolicy(bool value) {
-		this._isPrivacyPolicy = value;
-	}
+  bool get isPrivacyPolicy => this._isPrivacyPolicy;
+  set isPrivacyPolicy(bool value) {
+    this._isPrivacyPolicy = value;
+  }
 }
 
 
@@ -33,9 +33,8 @@ class SignUpScreen extends StatefulWidget {
 
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  LoginData _data = LoginData();
+  _LoginData _data = _LoginData();
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  var smsCodeCtrl = TextEditingController();
   String verificationId;
 
   @override
@@ -65,14 +64,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   Checkbox(
                     value: _data._isPrivacyPolicy,
                     onChanged: (bool value) {
-											setState(() {
-                      _data.isPrivacyPolicy = value;
-											});
+                      setState(() {
+                        _data.isPrivacyPolicy = value;
+                      });
                     }
                   ),
-                  MyText(
-                    'Я принимаю\nПолитику конфиденциальности'
-                  )
+                  MyText('Я принимаю\nПолитику конфиденциальности')
                 ],
               ),
               SizedBox(height: 10),
@@ -81,9 +78,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 onPressed: () {
                   if (_data.isPrivacyPolicy) {
                     checkAndSaveForm(_formKey);
+                    mySnackBarText(
+                      context,
+                      'Ожидайте подтверждения номера'
+                    );
                     signUp(context, _data.phone);
                   } else {
-                    mySnackBarText(context, 'Обязательно принятие условий');
+                    mySnackBarText(
+                      context,
+                      'Обязательно принятие условий'
+                    );
                   }
                 },
               ),
@@ -110,7 +114,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       },
       codeSent: (String verifyId, int forseToken) async {
         this.verificationId = verifyId;
-        
+
         String smsCode = await getSmsCode(context);
         if (smsCode.isNotEmpty && smsCode != null) {
           PhoneAuthCredential credential = PhoneAuthProvider.credential(
@@ -119,7 +123,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           await auth.signInWithCredential(credential);
           isAuth
             ? Navigator.of(context).pushReplacementNamed(HomeScreen.route)
-            : mySnackBarText(context, 'Error');
+            : mySnackBarText(context, errorLabel);
         } else {
           return null;
         }
