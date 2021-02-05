@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +23,9 @@ const primaryColor = Color(0xFF455A63);
 const secondaryColor = Color(0xFF91A4AE);
 const accidentalColor = Color(0xFFFF8A64);
 const darkColor = Color(0xFF253239);
+const darkerColor = Color(0xFF171E21);
 const lightColor = Color(0xFFD0D8DC);
+const errorColor = Colors.red;
 
 const mailer = {
   'email': 'vladislav2397service43@gmail.com',
@@ -37,6 +41,7 @@ FirebaseAuth get auth => FirebaseAuth.instance;
 User get user => auth.currentUser;
 DatabaseReference get db => FirebaseDatabase.instance.reference();
 Future<List<Employee>> get employes => fetchEmployee();
+Future<List<dynamic>> get services => fetchServices();
 bool get isAuth => user != null;
 
 Future<List<Employee>> fetchEmployee() async {
@@ -44,6 +49,11 @@ Future<List<Employee>> fetchEmployee() async {
   List<dynamic> mapEmployes = response.value;
 
   return mapEmployes.map((obj) => Employee.fromMap(obj)).toList();
+}
+
+Future<List<dynamic>> fetchServices() async {
+  var response = await db.child('services').once();
+  return response.value;
 }
 
 void checkAndSaveForm(GlobalKey<FormState> formKey) {
@@ -74,7 +84,7 @@ void sendEmail({
 }
 
 String phoneValidator(String value) {
-  return value.isEmpty || value.length != 11
+  return value.isEmpty || value.length < 11
     ? 'Введите коректный номер'
     : null;
 }

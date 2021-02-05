@@ -47,10 +47,10 @@ class _SOSScreenState extends State<SOSScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     MyTextFormField(
-                      initialValue: user?.phoneNumber ?? '7',
+                      initialValue: user?.phoneNumber ?? '+7',
                       validator: phoneValidator,
                       onSaved: (String value) {
-                        _data.phone = '+' + value;
+                        _data.phone = value;
                       },
                     ),
                     MyText(

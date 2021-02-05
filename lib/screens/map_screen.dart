@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 
 import 'package:service43/config.dart';
@@ -18,14 +16,6 @@ class MapScreen extends StatefulWidget {
 
 
 class _MapScreenState extends State<MapScreen> {
-  Future<List<Employee>> futureEmployes;
-
-  @override
-  void initState() {
-    super.initState();
-    futureEmployes = employes;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +23,7 @@ class _MapScreenState extends State<MapScreen> {
       body: SlidingUpPanel(
         panel: SizedBox(child: Container()),
         body: FutureBuilder<List<Employee>>(
-          future: futureEmployes,
+          future: employes,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return MyMapEmployes(snapshot.data);

@@ -8,13 +8,15 @@ import 'package:service43/screens/order_screen.dart';
 import 'package:service43/screens/map_screen.dart';
 import 'package:service43/screens/sos_screen.dart';
 
-// todo:>>> In Next Versions
+// todo: In Next Versions 2...
 
+// todo: Open Map screen
 // todo: Registration with google
 // todo: Refactoring code
 // todo: Realized BLoC pattern in app
 // todo: Or scoped model pattern
-// todo: Theme from main Scaffold
+// todo: Write API for DB
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,10 +34,10 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: darkColor,
         buttonColor: Colors.white
       ),
-      initialRoute: HomeScreen.route,
-      // initialRoute: isAuth
-      //   ? HomeScreen.route
-      //   : SignUpScreen.route,
+      // initialRoute: HomeScreen.route,
+      initialRoute: isAuth
+        ? HomeScreen.route
+        : SignUpScreen.route,
 
       routes: {
         SignUpScreen.route:   (_) => SignUpScreen(),

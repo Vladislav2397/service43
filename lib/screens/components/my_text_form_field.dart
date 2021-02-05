@@ -51,7 +51,12 @@ class MyTextFormField extends StatelessWidget {
         ),
         errorBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: Colors.red
+            color: errorColor
+          )
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: errorColor
           )
         ),
         hintText: this.hintText,
