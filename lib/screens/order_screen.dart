@@ -14,7 +14,6 @@ class _OrderData {
   String _street = '';
   String _house = '';
   String _room = '';
-  List<String> _services;
 
   String get job => this._job;
   String get area => this._area;
@@ -149,7 +148,7 @@ class __OrderFormState extends State<_OrderForm> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   MyTextFormField(
-                    labelText: 'Район',
+                    labelText: 'Населенный пункт',
                     validator: textValidator,
                     onSaved: (String value) {
                       _data._area = value;

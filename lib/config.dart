@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:service43/private.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -26,12 +27,6 @@ const darkColor = Color(0xFF253239);
 const darkerColor = Color(0xFF171E21);
 const lightColor = Color(0xFFD0D8DC);
 const errorColor = Colors.red;
-
-const mailer = {
-  'email': 'vladislav2397service43@gmail.com',
-  'password': '19@oXu*Ztt',
-  'recipient': 'valdiszz53@gmail.com',
-};
 
 // ignore: deprecated_member_use
 final smtpServer = gmail(mailer['email'], mailer['password']);

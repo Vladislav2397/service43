@@ -48,3 +48,4 @@ app.*.map.json
 # My config
 .vscode
 pubspec.lock
+lib/private.dart
