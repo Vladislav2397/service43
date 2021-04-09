@@ -4,8 +4,7 @@ import 'package:service43/private.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:mailer/mailer.dart';
-import 'package:mailer/smtp_server/gmail.dart';
+import 'package:mailer2/mailer.dart';
 import 'package:service43/screens/components/my_snack_bars.dart';
 
 import 'package:service43/screens/model/employee.dart';
@@ -16,7 +15,7 @@ const errorLabel = 'Ошибка';
 
 const phoneLabel = 'Телефон';
 const phoneExample = '79001234567';
-const phoneNumber = '+7(900)123-45-67';
+const phoneNumber = '+7(953)671-32-53';
 const phoneURL = 'tel://$phoneNumber';
 const phoneType = TextInputType.number;
 
@@ -28,8 +27,11 @@ const darkerColor = Color(0xFF171E21);
 const lightColor = Color(0xFFD0D8DC);
 const errorColor = Colors.red;
 
-// ignore: deprecated_member_use
-final smtpServer = gmail(mailer['email'], mailer['password']);
+final mailerOptions = new MailjetSmtpOptions()
+  ..username = mailer['user-key']
+  ..password = mailer['password-key'];
+
+final emailTransport = new SmtpTransport(mailerOptions);
 
 // Common getters
 FirebaseAuth get auth => FirebaseAuth.instance;
@@ -65,14 +67,14 @@ void sendEmail({
   String title,
   String content
 }) async {
-  final message = Message()
-    ..from = Address(mailer['email'])
+  final envelope = new Envelope()
+    ..from = mailer['email']
     ..recipients.add(mailer['recipient'])
     ..subject = title
     ..text = content;
-  
+
   try {
-    await send(message, smtpServer);
+    await emailTransport.send(envelope);
   } catch (err) {
     mySnackBarText(context, 'Error');
   }

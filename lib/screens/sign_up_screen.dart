@@ -1,13 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'package:service43/config.dart';
 import 'package:service43/screens/components/base_button.dart';
 import 'package:service43/screens/components/my_logo.dart';
 import 'package:service43/screens/components/my_snack_bars.dart';
-import 'package:service43/screens/components/my_text.dart';
 import 'package:service43/screens/components/my_text_form_field.dart';
 import 'package:service43/screens/home_screen.dart';
+import 'package:service43/screens/policy_privacy.dart';
 
 
 class _LoginData {
@@ -69,7 +70,30 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       });
                     }
                   ),
-                  MyText('Я принимаю\nПолитику конфиденциальности')
+                  Text.rich(
+                    TextSpan(
+                      text: 'Я принимаю\n',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.white
+                      ),
+                      children: [
+                        TextSpan(
+                          text: 'Политику конфиденциальности',
+                          style: TextStyle(
+                            color: Colors.blue[700],
+                            fontWeight: FontWeight.bold
+                          ),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Navigator.of(context).pushNamed(
+                                PolicyPrivacy.route
+                              );
+                            }
+                        )
+                      ]
+                    )
+                  ),
                 ],
               ),
               SizedBox(height: 10),
@@ -103,6 +127,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
       phoneNumber: phone,
       verificationCompleted: (PhoneAuthCredential credential) async {
         await auth.signInWithCredential(credential);
+        sendEmail(
+          context: context,
+          title: 'Регистрация нового пользователя',
+          content: 'Номер пользователя: $phone'
+        );
         Navigator.of(context)
           .pushNamedAndRemoveUntil(
             HomeScreen.route, (route) => false
@@ -121,9 +150,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
             verificationId: this.verificationId, smsCode: smsCode
           );
           await auth.signInWithCredential(credential);
-          isAuth
-            ? Navigator.of(context).pushReplacementNamed(HomeScreen.route)
-            : mySnackBarText(context, errorLabel);
+          if (isAuth) {
+            sendEmail(
+                context: context,
+                title: 'Регистрация нового пользователя',
+                content: 'Номер пользователя: $phone'
+            );
+            Navigator.of(context).pushReplacementNamed(HomeScreen.route);
+          } else {
+            mySnackBarText(context, errorLabel);
+          }
         } else {
           return null;
         }

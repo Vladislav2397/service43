@@ -27,8 +27,11 @@ dependencies:
 
   cupertino_icons: ^1.0.0
   sliding_up_panel: ^1.0.2
-  mailer: ^3.2.1
+  # mailer: ^3.2.1
+  mailer2: ^1.2.5
   url_launcher: any
+  flutter_launcher_icons: "^0.9.0"
+
 
   # Google maps
   google_maps_flutter: ^1.0.6
@@ -45,6 +48,14 @@ dev_dependencies:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
+
+
+flutter_icons:
+  image_path: "assets/images/logo.png"
+  image_path_android: "assets/images/logo.png"
+  android: true
+  ios: true
+
 
 # The following section is specific to Flutter.
 flutter:

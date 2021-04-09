@@ -24,6 +24,7 @@ class _OrderData {
     '''
       Пользователь: ${user?.phoneNumber}
       Услуга: $job
+      Населенный пункт: $area
       Улица: $street
       Дом: $house
       Квартира: $room

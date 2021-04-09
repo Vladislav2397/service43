@@ -43,13 +43,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     text: 'Заказать услугу',
                     onPressed: navigation(OrderScreen.route),
                   ),
-                  BaseButton(
-                    text: 'Посмотреть карту',
-                    onPressed: () {
-                      mySnackBarText(context, 'В разработке');
-                      // Navigator.pushNamed(context, MapScreen.route);
-                    },
-                  ),
+                  // BaseButton(
+                  //   text: 'Посмотреть карту',
+                  //   onPressed: () {
+                  //     mySnackBarText(context, 'В разработке');
+                  //     // Navigator.pushNamed(context, MapScreen.route);
+                  //   },
+                  // ),
                   BaseButton(
                     text: 'Экстренный вызов',
                     color: accidentalColor,
