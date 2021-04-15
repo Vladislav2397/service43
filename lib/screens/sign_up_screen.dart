@@ -18,7 +18,7 @@ class _LoginData {
   String get phone => this._phone;
   set phone(String value) => this._phone = value.toString().trim();
 
-  bool get isPrivacyPolicy => this._isPrivacyPolicy;
+  bool get isPrivacyPolicy => this._isPrivacyPolicy as bool;
   set isPrivacyPolicy(bool value) {
     this._isPrivacyPolicy = value;
   }

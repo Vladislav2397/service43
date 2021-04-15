@@ -22,6 +22,9 @@ import 'package:service43/screens/sos_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  auth.setSettings(
+    appVerificationDisabledForTesting: true
+  );
   runApp(MyApp());
 }
 
