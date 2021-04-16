@@ -15,7 +15,7 @@ const errorLabel = 'Ошибка';
 
 const phoneLabel = 'Телефон';
 const phoneExample = '79001234567';
-const phoneNumber = '+7(953)671-32-53';
+const phoneNumber = '+7(996)896-06-36';
 const phoneURL = 'tel://$phoneNumber';
 const phoneType = TextInputType.number;
 
