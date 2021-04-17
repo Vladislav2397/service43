@@ -13,10 +13,14 @@ import 'package:service43/screens/sos_screen.dart';
 
 // todo: Open Map screen
 // todo: Registration with google
+
+
+// todo: In Next Version 1.1
+
 // todo: Refactoring code
+// todo: Write API for DB
 // todo: Realized BLoC pattern in app
 // todo: Or scoped model pattern
-// todo: Write API for DB
 
 
 void main() async {
