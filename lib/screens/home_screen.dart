@@ -26,7 +26,10 @@ class _HomeScreenState extends State<HomeScreen> {
           Expanded(
             flex: 2,
             child: Center(
-              child: MyLogo(appName),
+              child: Text(
+                appName,
+                style: Theme.of(context).textTheme.headline1
+              ),
             ),
           ),
           Expanded(

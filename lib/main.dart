@@ -14,7 +14,6 @@ import 'package:service43/screens/sos_screen.dart';
 // todo: Open Map screen
 // todo: Registration with google
 
-
 // todo: In Next Version 1.1
 
 // todo: Refactoring code
@@ -22,16 +21,18 @@ import 'package:service43/screens/sos_screen.dart';
 // todo: Realized BLoC pattern in app
 // todo: Or scoped model pattern
 
+// todo: In Next Version 1.2
+// todo: Add config for IOS system
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   auth.setSettings(
-    appVerificationDisabledForTesting: true
+      appVerificationDisabledForTesting: true,
+      userAccessGroup: ''
   );
   runApp(MyApp());
 }
-
 
 class MyApp extends StatelessWidget {
   @override
@@ -39,21 +40,44 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: appName,
       theme: ThemeData(
-        scaffoldBackgroundColor: darkColor,
-        buttonColor: Colors.white
+          scaffoldBackgroundColor: darkColor,
+          buttonColor: Colors.white,
+          textTheme: TextTheme(
+            headline1: TextStyle(
+                fontSize: 32,
+                fontWeight: FontWeight.bold,
+                color: accidentalColor
+            ),
+          ),
+          inputDecorationTheme: InputDecorationTheme(
+              enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: secondaryColor)
+              ),
+              focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: secondaryColor)
+              ),
+              errorBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: errorColor)
+              ),
+              focusedErrorBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: errorColor)
+              ),
+              hintStyle: TextStyle(
+                  color: Colors.white
+              ),
+              labelStyle: TextStyle(
+                  color: Colors.white
+              )
+          )
       ),
-      // initialRoute: HomeScreen.route,
-      initialRoute: isAuth
-        ? HomeScreen.route
-        : SignUpScreen.route,
-
+      initialRoute: isAuth ? HomeScreen.route : SignUpScreen.route,
       routes: {
-        SignUpScreen.route:   (_) => SignUpScreen(),
-        PolicyPrivacy.route:  (_) => PolicyPrivacy(),
-        HomeScreen.route:     (_) => HomeScreen(),
-        OrderScreen.route:    (_) => OrderScreen(),
-        MapScreen.route:      (_) => MapScreen(),
-        SOSScreen.route:      (_) => SOSScreen(),
+        SignUpScreen.route: (_) => SignUpScreen(),
+        PolicyPrivacy.route: (_) => PolicyPrivacy(),
+        HomeScreen.route: (_) => HomeScreen(),
+        OrderScreen.route: (_) => OrderScreen(),
+        MapScreen.route: (_) => MapScreen(),
+        SOSScreen.route: (_) => SOSScreen(),
       },
     );
   }

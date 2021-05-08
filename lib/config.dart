@@ -14,7 +14,7 @@ const databaseURL = 'https://service43-64544-default-rtdb.firebaseio.com/';
 const errorLabel = 'Ошибка';
 
 const phoneLabel = 'Телефон';
-const phoneExample = '79001234567';
+const phoneExample = '+79001234567';
 const phoneNumber = '+7(996)896-06-36';
 const phoneURL = 'tel://$phoneNumber';
 const phoneType = TextInputType.number;

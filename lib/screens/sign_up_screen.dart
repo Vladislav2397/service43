@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 
 import 'package:service43/config.dart';
 import 'package:service43/screens/components/base_button.dart';
-import 'package:service43/screens/components/my_logo.dart';
 import 'package:service43/screens/components/my_snack_bars.dart';
 import 'package:service43/screens/components/my_text_form_field.dart';
 import 'package:service43/screens/home_screen.dart';
@@ -48,15 +47,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              MyLogo(appName),
+              Text(
+                appName,
+                style: Theme.of(context).textTheme.headline1
+              ),
               SizedBox(height: 100),
               MyTextFormField(
-                inputType: phoneType,
                 hintText: phoneExample,
                 labelText: phoneLabel,
+                initialValue: '+7',
                 validator: phoneValidator,
                 onSaved: (String value) {
-                  _data.phone = '+' + value;
+                  _data.phone = value;
                 },
               ),
               SizedBox(height: 10),
